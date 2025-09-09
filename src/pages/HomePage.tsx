@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
     },
     {
       title: 'Serii Limitate',
-      description: 'Colecții uniche cu sticle pictate de mână',
+      description: 'Colecții unicate cu sticle pictate de mână',
       image: 'https://images.pexels.com/photos/3009020/pexels-photo-3009020.jpeg?auto=compress&cs=tinysrgb&w=800',
       price: '300-1200 €',
     },
@@ -102,9 +102,6 @@ const HomePage: React.FC = () => {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-serif">
                 {t('collections.title')}
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Descoperă gama noastră exclusivă de vinuri premium cu sticle pictate artistic
-              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

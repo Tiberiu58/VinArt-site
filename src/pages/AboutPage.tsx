@@ -55,9 +55,6 @@ const AboutPage: React.FC = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif">
             {t('about.title')}
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            O poveste de pasiune pentru vin și artă, născută din dorința de a crea experiențe unice și memorabile
-          </p>
         </div>
       </section>
 
