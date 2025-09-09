@@ -5,9 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CollectionsPage from './pages/CollectionsPage';
-import ConfiguratorPage from './pages/ConfiguratorPage';
 import AboutPage from './pages/AboutPage';
-import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 
 function App() {
@@ -20,9 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/collections" element={<CollectionsPage />} />
-              <Route path="/configurator" element={<ConfiguratorPage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/blog" element={<BlogPage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </main>

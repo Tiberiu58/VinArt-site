@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wine, Globe } from 'lucide-react';
+import { Menu, X, Wine } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Header: React.FC = () => {
@@ -11,9 +11,7 @@ const Header: React.FC = () => {
   const navigation = [
     { name: t('nav.home'), href: '/' },
     { name: t('nav.collections'), href: '/collections' },
-    { name: t('nav.configurator'), href: '/configurator' },
     { name: t('nav.about'), href: '/about' },
-    { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.contact'), href: '/contact' },
   ];
 
@@ -55,29 +53,6 @@ const Header: React.FC = () => {
 
           {/* Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <div className="hidden sm:flex items-center space-x-2 bg-gray-50 rounded-lg p-1">
-              <button
-                onClick={() => setLanguage('ro')}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
-                  language === 'ro'
-                    ? 'bg-white text-yellow-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                RO
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
-                  language === 'en'
-                    ? 'bg-white text-yellow-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                EN
-              </button>
-            </div>
-
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -107,29 +82,6 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="flex items-center justify-center space-x-2 pt-4 border-t border-gray-100">
-              <Globe className="h-4 w-4 text-gray-500" />
-              <button
-                onClick={() => setLanguage('ro')}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
-                  language === 'ro'
-                    ? 'bg-yellow-100 text-yellow-600'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                RO
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${
-                  language === 'en'
-                    ? 'bg-yellow-100 text-yellow-600'
-                    : 'text-gray-600 hover:text-gray-800'
-                }`}
-              >
-                EN
-              </button>
-            </div>
           </div>
         </div>
       )}
