@@ -1,9 +1,13 @@
+// src/pages/ContactPage.tsx
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import AssistantChat from '../components/AssistantChat';
+import supabase from '../lib/supabaseClient';
 
 const ContactPage: React.FC = () => {
   const { t } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,17 +17,53 @@ const ContactPage: React.FC = () => {
     type: 'general',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission
+  const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  // ✅ stare pentru fereastra de chat
+  const [chatOpen, setChatOpen] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  // ✅ trimite direct în Supabase (tabela public.messages)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setError(null);
+
+    try {
+      if (!formData.message.trim()) {
+        throw new Error('Te rugăm să completezi mesajul.');
+      }
+
+      const { error: dbError } = await supabase.from('messages').insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        source: `contact-page:${formData.type}`,
+        phone: formData.phone.trim(),
+        subject: formData.subject.trim(),
+      });
+
+      if (dbError) throw new Error(dbError.message || 'Eroare la trimitere.');
+
+      setStatus('ok');
+      setFormData({
+        type: 'general',
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+    } catch (err: any) {
+      setStatus('error');
+      setError(err?.message || 'A apărut o eroare.');
+    }
   };
 
   const contactInfo = [
@@ -56,19 +96,23 @@ const ContactPage: React.FC = () => {
   const faqItems = [
     {
       question: 'Care este timpul de livrare pentru comenzile personalizate?',
-      answer: 'Pentru comenzile personalizate, timpul de realizare este între 7-14 zile lucrătoare, în funcție de complexitatea designului ales.',
+      answer:
+        'Pentru comenzile personalizate, timpul de realizare este între 7-14 zile lucrătoare, în funcție de complexitatea designului ales.',
     },
     {
       question: 'Oferă certificat de autenticitate pentru vinurile din colecție?',
-      answer: 'Da, fiecare sticlă vine cu certificat de autenticitate care atestă calitatea vinului și originalitatea designului artistic.',
+      answer:
+        'Da, fiecare sticlă vine cu certificat de autenticitate care atestă calitatea vinului și originalitatea designului artistic.',
     },
     {
       question: 'Pot returna o comandă personalizată?',
-      answer: 'Având în vedere natura personalizată a produselor, retururile sunt posibile doar în caz de defecte de fabricație sau erori din partea noastră.',
+      answer:
+        'Având în vedere natura personalizată a produselor, retururile sunt posibile doar în caz de defecte de fabricație sau erori din partea noastră.',
     },
     {
       question: 'Organizați degustări private?',
-      answer: 'Da, organizăm degustări private la sediul nostru sau la locația dumneavoastră. Contactați-ne pentru detalii și disponibilitate.',
+      answer:
+        'Da, organizăm degustări private la sediul nostru sau la locația dumneavoastră. Contactați-ne pentru detalii și disponibilitate.',
     },
   ];
 
@@ -95,10 +139,20 @@ const ContactPage: React.FC = () => {
                 <div className="p-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg">
                   <Send className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-gray-900 font-serif">
-                  Trimite-ne un Mesaj
-                </h2>
+                <h2 className="text-3xl font-bold text-gray-900 font-serif">Trimite-ne un Mesaj</h2>
               </div>
+
+              {/* Alerts */}
+              {status === 'ok' && (
+                <div className="mb-6 rounded-xl border border-green-300 bg-green-50 text-green-800 px-4 py-3">
+                  Mesajul a fost trimis cu succes. Îți mulțumim! 🙌
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="mb-6 rounded-xl border border-red-300 bg-red-50 text-red-800 px-4 py-3">
+                  {error || 'A apărut o eroare la trimitere.'}
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Contact Type */}
@@ -198,11 +252,12 @@ const ContactPage: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  disabled={status === 'loading'}
+                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:hover:scale-100"
                 >
                   <span className="flex items-center justify-center space-x-2">
                     <Send className="h-5 w-5" />
-                    <span>Trimite Mesajul</span>
+                    <span>{status === 'loading' ? 'Trimit...' : 'Trimite Mesajul'}</span>
                   </span>
                 </button>
               </form>
@@ -243,7 +298,11 @@ const ContactPage: React.FC = () => {
               <p className="text-green-700 mb-4">
                 Consultanții noștri sunt online și gata să vă ajute cu orice întrebare.
               </p>
-              <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors duration-200">
+              {/* ✅ butonul tău deschide chatul */}
+              <button
+                onClick={() => setChatOpen(true)}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+              >
                 Începe Chat-ul
               </button>
             </div>
@@ -253,9 +312,7 @@ const ContactPage: React.FC = () => {
         {/* FAQ Section */}
         <div className="mt-20">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-serif">
-              Întrebări Frecvente
-            </h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-serif">Întrebări Frecvente</h2>
             <p className="text-xl text-gray-600">
               Răspunsuri la cele mai comune întrebări despre produsele și serviciile noastre
             </p>
@@ -263,23 +320,19 @@ const ContactPage: React.FC = () => {
 
           <div className="max-w-4xl mx-auto space-y-4">
             {faqItems.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
-              >
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">
-                    {item.question}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.answer}
-                  </p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">{item.question}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.answer}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* ✅ fereastra de chat montată pe pagină */}
+      <AssistantChat open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );
 };

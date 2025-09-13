@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LanguageProvider } from './contexts/LanguageContext';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import CollectionsPage from './pages/CollectionsPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
+// src/App.tsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { LanguageProvider } from "./contexts/LanguageContext";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+import HomePage from "./pages/HomePage";
+import CollectionsPage from "./pages/CollectionsPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage"; // ContactPage va randa <ContactForm />
 
 function App() {
   return (
     <LanguageProvider>
       <Router>
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white flex flex-col">
           <Header />
-          <main>
+          <main className="flex-1">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/collections" element={<CollectionsPage />} />
