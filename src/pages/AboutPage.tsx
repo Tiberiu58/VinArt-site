@@ -13,12 +13,6 @@ const AboutPage: React.FC = () => {
       description: 'Cu o experiență de peste 20 de ani în industria vinului, Alexandru este sufletul companiei.',
     },
     {
-      name: 'Maria Cristescu',
-      role: 'Director Artistic',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Coordonează colaborarea cu artiștii și supervizează calitatea designurilor.',
-    },
-    {
       name: 'Gheorghe Munteanu',
       role: 'Master Vinificator',
       image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
