@@ -40,6 +40,12 @@ const ContactPage: React.FC = () => {
         throw new Error('Te rugăm să completezi mesajul.');
       }
 
+      // Check if Supabase is properly configured
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      if (!supabaseUrl || supabaseUrl.includes('placeholder')) {
+        throw new Error('Serviciul de contact nu este configurat momentan. Te rugăm să ne contactezi direct la contact@vinart.ro sau +40 21 123 4567.');
+      }
+
       const { error: dbError } = await supabase.from('messages').insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
