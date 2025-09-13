@@ -40,30 +40,11 @@ const HomePage: React.FC = () => {
             <WineBottle3D className="opacity-30" />
           </div>
           
-          {/* Background Video/Image */}
-          <div className="absolute inset-0 z-10">
-            <div className="relative w-full h-full bg-gradient-to-r from-black/60 to-black/40">
-              <img
-                src="https://images.pexels.com/photos/1407846/pexels-photo-1407846.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                alt="Premium Wine Collection"
-                className="w-full h-full object-cover opacity-40"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
-            </div>
-            
-            {/* Video Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center z-20">
-              <button
-                onClick={() => setIsVideoPlaying(true)}
-                className="group bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 rounded-full p-4 border border-white/30 hover:scale-105 shadow-2xl"
-              >
-                <Play className="h-8 w-8 text-white ml-1" />
-              </button>
-            </div>
-          </div>
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
 
           {/* Hero Content */}
-          <div className="relative z-30 text-center max-w-4xl mx-auto px-4">
+          <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
               {t('hero.title')}
             </h1>
