@@ -35,16 +35,19 @@ const HomePage: React.FC = () => {
       <div className="pt-16">
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          {/* Gradient Background */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600" />
+          
           {/* 3D Wine Bottle Background */}
-          <div className="absolute inset-0 z-0">
-            <WineBottle3D className="opacity-60" />
+          <div className="absolute inset-0 z-10">
+            <WineBottle3D className="opacity-90" />
           </div>
           
           {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
 
           {/* Hero Content */}
-          <div className="relative z-20 max-w-7xl mx-auto px-4 w-full">
+          <div className="relative z-30 max-w-7xl mx-auto px-4 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Text Content - Left Side */}
               <div className="text-left">
