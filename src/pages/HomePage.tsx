@@ -68,15 +68,6 @@ const HomePage: React.FC = () => {
                   </span>
                 </Link>
                 
-                <Link
-                  to="/collections"
-                  className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-full border-2 border-white/30 hover:border-white/50 transition-all duration-300 transform hover:scale-105 w-fit"
-                >
-                  <span className="flex items-center justify-center space-x-2">
-                    <span>Vezi Colecțiile</span>
-                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </Link>
               </div>
             </div>
           </div>
