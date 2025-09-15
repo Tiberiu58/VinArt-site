@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2 text-gray-300">
                   <Mail className="h-4 w-4 text-yellow-400" />
-                  <span>contact@vinart.ro</span>
+                  <span>contact@wineartist.ro</span>
                 </div>
                 <div className="flex items-start space-x-2 text-gray-300">
                   <MapPin className="h-4 w-4 text-yellow-400 mt-1" />

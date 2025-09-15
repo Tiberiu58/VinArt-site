@@ -76,7 +76,7 @@ const ContactPage: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      details: ['contact@vinart.ro', 'comenzi@vinart.ro'],
+      details: ['contact@wineartist.ro', 'comenzi@vinart.ro'],
       description: 'Răspundem în maxim 24 ore',
     },
     {
