@@ -25,19 +25,19 @@ const AboutPage: React.FC = () => {
       name: 'Maria Ionescu',
       specialty: 'Abstract Modern',
       achievements: 'Laureată a Bienalei de Artă București 2022',
-      image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
     },
     {
       name: 'Andrei Popescu',
       specialty: 'Clasic Romantic',
       achievements: 'Membru al Uniunii Artiștilor Plastici din România',
-      image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
     },
     {
       name: 'Elena Radu',
       specialty: 'Minimalist Elegant',
       achievements: 'Expozițiile la Galeria Națională de Artă',
-      image: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
     },
   ];
 

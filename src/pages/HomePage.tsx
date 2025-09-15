@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
     {
       title: 'Serii Limitate',
       description: 'Colecții unicate cu sticle pictate de mână',
-      image: 'https://images.pexels.com/photos/3009020/pexels-photo-3009020.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://images.pexels.com/photos/1407846/pexels-photo-1407846.jpeg?auto=compress&cs=tinysrgb&w=800',
       price: '300-1200 €',
     },
     {

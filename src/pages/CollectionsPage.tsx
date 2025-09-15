@@ -22,7 +22,7 @@ const CollectionsPage: React.FC = () => {
       id: 2,
       name: 'Cabernet Sauvignon Gold',
       category: 'standard',
-      image: 'https://images.pexels.com/photos/3009020/pexels-photo-3009020.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://images.pexels.com/photos/1407846/pexels-photo-1407846.jpeg?auto=compress&cs=tinysrgb&w=800',
       artist: 'Andrei Popescu',
       year: '2021',
       rating: 4.7,
