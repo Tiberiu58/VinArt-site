@@ -67,30 +67,10 @@ const Header: React.FC = () => {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-yellow-600 relative ${
-                    isActive(item.href)
-                      ? 'text-yellow-600'
-                      : 'text-gray-700'
-                  }`}
-                >
-                  {item.name}
-                  {isActive(item.href) && (
-                    <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full" />
-                  )}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Mobile Menu Button */}
+            {/* Menu Button (3 lines) */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors duration-200 z-50 relative"
+              className="p-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors duration-200 z-50 relative"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-6">
@@ -110,82 +90,69 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Sliding Menu */}
-      <div className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ease-in-out ${
+      {/* Fullscreen Menu */}
+      <div className={`fixed inset-0 z-40 transition-all duration-700 ease-in-out ${
         isMenuOpen ? 'visible' : 'invisible'
       }`}>
-        {/* Backdrop */}
+        {/* Fullscreen Background with Hero Gradient */}
         <div 
-          className={`absolute inset-0 bg-black transition-opacity duration-500 ease-in-out ${
-            isMenuOpen ? 'opacity-50' : 'opacity-0'
+          className={`absolute inset-0 bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300 transition-all duration-700 ease-in-out transform ${
+            isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
           }`}
-          onClick={() => setIsMenuOpen(false)}
-        />
-        
-        {/* Sliding Menu Panel */}
-        <div className={`absolute top-0 left-0 h-full w-full max-w-sm bg-white shadow-2xl transform transition-transform duration-500 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}>
-          {/* Menu Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gradient-to-r from-yellow-50 to-yellow-100">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg">
-                <Wine className="h-6 w-6 text-white" />
+        >
+          {/* Menu Content */}
+          <div className="flex items-center justify-center min-h-screen p-8">
+            <nav className="text-center">
+              <div className="space-y-8">
+                {navigation.map((item, index) => (
+                  <div
+                    key={item.name}
+                    className={`transform transition-all duration-700 ease-out ${
+                      isMenuOpen 
+                        ? 'translate-y-0 opacity-100' 
+                        : 'translate-y-10 opacity-0'
+                    }`}
+                    style={{
+                      transitionDelay: isMenuOpen ? `${index * 150 + 200}ms` : '0ms'
+                    }}
+                  >
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`group block text-6xl md:text-8xl font-bold transition-all duration-300 hover:scale-110 ${
+                        isActive(item.href)
+                          ? 'text-white drop-shadow-lg'
+                          : 'text-white/80 hover:text-white hover:drop-shadow-lg'
+                      }`}
+                    >
+                      <div className="flex items-center justify-center space-x-4">
+                        <item.icon className={`h-12 w-12 md:h-16 md:w-16 transition-all duration-300 ${
+                          isActive(item.href) ? 'text-white' : 'text-white/60 group-hover:text-white'
+                        }`} />
+                        <span className="font-serif">{item.name}</span>
+                      </div>
+                      {isActive(item.href) && (
+                        <div className="w-24 h-1 bg-white rounded-full mx-auto mt-4 shadow-lg" />
+                      )}
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <span className="text-xl font-bold text-black">WineArtist</span>
-            </div>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-white/50 transition-colors duration-200"
-              aria-label="Close menu"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
 
-          {/* Menu Items */}
-          <nav className="flex flex-col p-6 space-y-2">
-            {navigation.map((item, index) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`group flex items-center space-x-4 px-4 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 ${
-                  isActive(item.href)
-                    ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-yellow-600'
-                }`}
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                  animation: isMenuOpen ? 'slideInFromLeft 0.6s ease-out forwards' : 'none'
-                }}
-              >
-                <div className={`p-2 rounded-lg transition-colors duration-300 ${
-                  isActive(item.href)
-                    ? 'bg-white/20'
-                    : 'bg-gray-100 group-hover:bg-yellow-100'
-                }`}>
-                  <item.icon className={`h-5 w-5 transition-colors duration-300 ${
-                    isActive(item.href)
-                      ? 'text-white'
-                      : 'text-gray-600 group-hover:text-yellow-600'
-                  }`} />
-                </div>
-                <span className="text-lg font-medium">{item.name}</span>
-                {isActive(item.href) && (
-                  <div className="ml-auto w-2 h-2 bg-white rounded-full" />
-                )}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Menu Footer */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-100 bg-gray-50">
-            <div className="text-center">
-              <p className="text-sm text-gray-500 mb-2">Contactează-ne</p>
-              <p className="text-sm font-medium text-gray-700">contact@wineartist.ro</p>
-              <p className="text-sm font-medium text-gray-700">+40 21 123 4567</p>
-            </div>
+              {/* Close instruction */}
+              <div className={`mt-16 transform transition-all duration-700 ease-out ${
+                isMenuOpen 
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-10 opacity-0'
+              }`}
+              style={{
+                transitionDelay: isMenuOpen ? '800ms' : '0ms'
+              }}>
+                <p className="text-white/60 text-lg">
+                  Apasă ESC sau X pentru a închide
+                </p>
+              </div>
+            </nav>
           </div>
         </div>
       </div>
@@ -195,7 +162,7 @@ const Header: React.FC = () => {
         @keyframes slideInFromLeft {
           from {
             opacity: 0;
-            transform: translateX(-20px);
+            transform: translateX(-100%);
           }
           to {
             opacity: 1;
