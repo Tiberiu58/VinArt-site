@@ -120,7 +120,6 @@ const Header: React.FC = () => {
                     <Link
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`group block text-6xl md:text-8xl font-bold transition-all duration-300 hover:scale-110 ${
                       className={`group block text-3xl md:text-4xl font-bold transition-all duration-300 hover:scale-105 ${
                         isActive(item.href)
                           ? 'text-black drop-shadow-sm'
