@@ -70,7 +70,7 @@ const Header: React.FC = () => {
             {/* Menu Button (3 lines) */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors duration-200 z-50 relative"
+              className="flex items-center space-x-2 p-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors duration-200 z-50 relative"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-6">
@@ -85,6 +85,7 @@ const Header: React.FC = () => {
                   }`} 
                 />
               </div>
+              <span className="text-sm font-medium">Menu</span>
             </button>
           </div>
         </div>
@@ -102,8 +103,8 @@ const Header: React.FC = () => {
         >
           {/* Menu Content */}
           <div className="flex items-center justify-center min-h-screen p-8">
-            <nav className="text-center">
-              <div className="space-y-8">
+            <nav className="text-center max-w-2xl mx-auto">
+              <div className="space-y-6">
                 {navigation.map((item, index) => (
                   <div
                     key={item.name}
@@ -120,19 +121,20 @@ const Header: React.FC = () => {
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
                       className={`group block text-6xl md:text-8xl font-bold transition-all duration-300 hover:scale-110 ${
+                      className={`group block text-3xl md:text-4xl font-bold transition-all duration-300 hover:scale-105 ${
                         isActive(item.href)
-                          ? 'text-white drop-shadow-lg'
-                          : 'text-white/80 hover:text-white hover:drop-shadow-lg'
+                          ? 'text-black drop-shadow-sm'
+                          : 'text-black/80 hover:text-black hover:drop-shadow-sm'
                       }`}
                     >
-                      <div className="flex items-center justify-center space-x-4">
-                        <item.icon className={`h-12 w-12 md:h-16 md:w-16 transition-all duration-300 ${
-                          isActive(item.href) ? 'text-white' : 'text-white/60 group-hover:text-white'
+                      <div className="flex items-center justify-center space-x-3">
+                        <item.icon className={`h-8 w-8 md:h-10 md:w-10 transition-all duration-300 ${
+                          isActive(item.href) ? 'text-black' : 'text-black/60 group-hover:text-black'
                         }`} />
                         <span className="font-serif">{item.name}</span>
                       </div>
                       {isActive(item.href) && (
-                        <div className="w-24 h-1 bg-white rounded-full mx-auto mt-4 shadow-lg" />
+                        <div className="w-16 h-0.5 bg-black rounded-full mx-auto mt-3 shadow-sm" />
                       )}
                     </Link>
                   </div>
@@ -148,7 +150,7 @@ const Header: React.FC = () => {
               style={{
                 transitionDelay: isMenuOpen ? '800ms' : '0ms'
               }}>
-                <p className="text-white/60 text-lg">
+                <p className="text-black/60 text-base">
                   Apasă ESC sau X pentru a închide
                 </p>
               </div>
