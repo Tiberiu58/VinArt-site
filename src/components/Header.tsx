@@ -149,7 +149,7 @@ const Header: React.FC = () => {
               style={{
                 transitionDelay: isMenuOpen ? '800ms' : '0ms'
               }}>
-                <p className="text-black/60 text-base">
+                <p className="text-white/60 text-lg">
                   Apasă ESC sau X pentru a închide
                 </p>
               </div>
