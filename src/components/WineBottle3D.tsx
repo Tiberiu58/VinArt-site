@@ -126,61 +126,75 @@ const WineBottle3D: React.FC<WineBottle3DProps> = ({ className = "" }) => {
     bottleGroup.add(wine);
 
     // Label
-    const labelGeometry = new THREE.PlaneGeometry(1.2, 1.6);
+    const labelGeometry = new THREE.CylinderGeometry(0.81, 0.86, 1.6, 32, 1, true);
     const labelMaterial = new THREE.MeshLambertMaterial({
       color: 0xf8f8f8,
       transparent: true,
       opacity: 0.9,
+      side: THREE.DoubleSide,
     });
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
-    label.position.set(0.81, 0.5, 0);
-    label.rotation.y = Math.PI / 2;
+    label.position.set(0, 0.5, 0);
     bottleGroup.add(label);
 
     // Add artistic pattern to label
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
+    canvas.width = 512;
+    canvas.height = 512;
     const ctx = canvas.getContext('2d')!;
     
     // Create gradient background
-    const gradient = ctx.createLinearGradient(0, 0, 256, 256);
+    const gradient = ctx.createLinearGradient(0, 0, 512, 512);
     gradient.addColorStop(0, '#FFD700');
     gradient.addColorStop(0.5, '#FF6B6B');
     gradient.addColorStop(1, '#4ECDC4');
     
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, 512, 512);
     
     // Add some artistic elements
     ctx.globalAlpha = 0.3;
     ctx.fillStyle = '#ffffff';
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
       ctx.beginPath();
       ctx.arc(
-        Math.random() * 256,
-        Math.random() * 256,
+        Math.random() * 512,
+        Math.random() * 512,
         Math.random() * 20 + 5,
         0,
         Math.PI * 2
       );
       ctx.fill();
     }
+    
+    // Add VinArt text
+    ctx.globalAlpha = 0.8;
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 48px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('VinArt', 256, 200);
+    
+    ctx.font = '24px serif';
+    ctx.fillText('Premium Collection', 256, 240);
 
     const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
     const patternMaterial = new THREE.MeshLambertMaterial({
       map: texture,
       transparent: true,
       opacity: 0.7,
+      side: THREE.DoubleSide,
     });
-    const pattern = new THREE.Mesh(labelGeometry, patternMaterial);
-    pattern.position.set(0.82, 0.5, 0);
-    pattern.rotation.y = Math.PI / 2;
+    const patternGeometry = new THREE.CylinderGeometry(0.82, 0.87, 1.6, 32, 1, true);
+    const pattern = new THREE.Mesh(patternGeometry, patternMaterial);
+    pattern.position.set(0, 0.5, 0);
     bottleGroup.add(pattern);
 
     // Position the bottle group
-    bottleGroup.position.set(0, 0, 0);
+    bottleGroup.position.set(0, -0.5, 0);
     bottleGroup.rotation.x = 0.1;
+    bottleGroup.scale.set(0.8, 0.8, 0.8);
 
     // GSAP Animation
     gsap.to(bottleGroup.rotation, {

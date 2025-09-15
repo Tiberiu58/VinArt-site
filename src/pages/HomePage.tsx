@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* 3D Wine Bottle Background */}
           <div className="absolute inset-0 z-0">
-            <WineBottle3D className="opacity-30" />
+            <WineBottle3D className="opacity-60" />
           </div>
           
           {/* Dark overlay for text readability */}
