@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* Gradient Background */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600" />
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300" />
           
           {/* 3D Wine Bottle Background */}
           <div className="absolute inset-0 z-10">
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
           </div>
           
           {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/50 via-black/20 to-black/50" />
 
           {/* Hero Content */}
           <div className="relative z-30 max-w-7xl mx-auto px-4 w-full">
