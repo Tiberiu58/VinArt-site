@@ -186,7 +186,7 @@ const WineBottle3D: React.FC<WineBottle3DProps> = ({ className = "" }) => {
     ctx.fillStyle = '#000000';
     ctx.font = 'bold 72px serif';
     ctx.textAlign = 'center';
-    ctx.fillText('VinArt', 512, 400);
+    ctx.fillText('WineArtist', 512, 400);
     
     ctx.font = '36px serif';
     ctx.fillText('Premium Collection', 512, 460);

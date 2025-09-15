@@ -67,7 +67,7 @@ export default function AssistantChat({ open, onClose }: Props) {
       <div className="absolute inset-0 bg-black/40" onClick={onClose} aria-hidden />
       <div className="absolute right-4 bottom-4 w-[92vw] max-w-md bg-white rounded-2xl shadow-2xl border flex flex-col">
         <div className="px-4 py-3 border-b flex items-center justify-between">
-          <div className="font-semibold">Asistent VinArt</div>
+          <div className="font-semibold">Asistent WineArtist</div>
           <button onClick={onClose} className="rounded-md px-2 py-1 hover:bg-gray-100" aria-label="Închide">×</button>
         </div>
 

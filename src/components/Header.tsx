@@ -27,7 +27,7 @@ const Header: React.FC = () => {
               <Wine className="h-6 w-6 text-white" />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-yellow-600 to-yellow-500 bg-clip-text text-transparent">
-              VinArt
+              WineArtist
             </span>
           </Link>
 

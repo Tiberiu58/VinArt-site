@@ -62,7 +62,7 @@ const AboutPage: React.FC = () => {
               </h2>
               <div className="prose prose-lg text-gray-600 space-y-6">
                 <p>
-                  VinArt s-a născut din întâlnirea a două pasiuni: vinul de calitate și arta autentică. 
+                  WineArtist s-a născut din întâlnirea a două pasiuni: vinul de calitate și arta autentică. 
                   În 2018, Alexandru Vintilă, un sommelier cu experiență vastă, s-a întâlnit cu Maria Cristescu, 
                   o curatoare de artă renumită.
                 </p>
@@ -72,7 +72,7 @@ const AboutPage: React.FC = () => {
                   de colecție autentice.
                 </p>
                 <p>
-                  Astăzi, VinArt este recunoscut ca lider în segmentul premium al vinurilor artistice, 
+                  Astăzi, WineArtist este recunoscut ca lider în segmentul premium al vinurilor artistice, 
                   cu o rețea de peste 25 de artiști colaboratori și mii de clienți mulțumiți din toată Europa.
                 </p>
               </div>
