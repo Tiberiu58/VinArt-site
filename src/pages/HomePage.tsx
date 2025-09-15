@@ -44,34 +44,40 @@ const HomePage: React.FC = () => {
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
 
           {/* Hero Content */}
-          <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
-              {t('hero.title')}
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
-              {t('hero.subtitle')}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
-                to="/collections"
-                className="group bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
-              >
-                <span className="flex items-center justify-center space-x-2">
-                  <span>{t('hero.cta.collections')}</span>
-                  <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Link>
+          <div className="relative z-20 max-w-7xl mx-auto px-4 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Text Content - Left Side */}
+              <div className="text-left">
+                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
+                  {t('hero.title')}
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                  {t('hero.subtitle')}
+                </p>
+              </div>
               
-              <Link
-                to="/collections"
-                className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-full border-2 border-white/30 hover:border-white/50 transition-all duration-300 transform hover:scale-105"
-              >
-                <span className="flex items-center justify-center space-x-2">
-                  <span>Vezi Colecțiile</span>
-                  <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Link>
+              {/* CTA Buttons - Right Side */}
+              <div className="flex flex-col gap-6 lg:items-end">
+                <Link
+                  to="/collections"
+                  className="group bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl w-fit"
+                >
+                  <span className="flex items-center justify-center space-x-2">
+                    <span>{t('hero.cta.collections')}</span>
+                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </Link>
+                
+                <Link
+                  to="/collections"
+                  className="group bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-full border-2 border-white/30 hover:border-white/50 transition-all duration-300 transform hover:scale-105 w-fit"
+                >
+                  <span className="flex items-center justify-center space-x-2">
+                    <span>Vezi Colecțiile</span>
+                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
