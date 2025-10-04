@@ -1,13 +1,107 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Play, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import WineBottle3D from '../components/WineBottle3D';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HomePage: React.FC = () => {
   const { t } = useLanguage();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showCookieModal, setShowCookieModal] = useState(false);
+
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroSubtitleRef = useRef<HTMLParagraphElement>(null);
+  const heroButtonsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Entrance animations on page load
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo(
+        heroTitleRef.current,
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.9
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          delay: 0.3
+        }
+      )
+      .fromTo(
+        heroSubtitleRef.current,
+        {
+          opacity: 0,
+          y: 50
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+        },
+        '-=0.6'
+      )
+      .fromTo(
+        heroButtonsRef.current,
+        {
+          opacity: 0,
+          y: 30
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+        },
+        '-=0.5'
+      );
+
+      // ScrollTrigger animations
+      ScrollTrigger.create({
+        trigger: heroTitleRef.current,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          if (heroTitleRef.current) {
+            gsap.to(heroTitleRef.current, {
+              y: progress * -50,
+              opacity: 1 - progress * 0.5,
+              duration: 0.1
+            });
+          }
+        }
+      });
+
+      ScrollTrigger.create({
+        trigger: heroSubtitleRef.current,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          if (heroSubtitleRef.current) {
+            gsap.to(heroSubtitleRef.current, {
+              y: progress * -30,
+              opacity: 1 - progress * 0.6,
+              duration: 0.1
+            });
+          }
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   const featuredCollections = [
     {
@@ -51,16 +145,22 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Text Content - Left Side */}
               <div className="text-left">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
+                <h1
+                  ref={heroTitleRef}
+                  className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif"
+                >
                   {t('hero.title')}
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                <p
+                  ref={heroSubtitleRef}
+                  className="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed"
+                >
                   {t('hero.subtitle')}
                 </p>
               </div>
-              
+
               {/* CTA Buttons - Right Side */}
-              <div className="flex flex-col gap-6 lg:items-end">
+              <div ref={heroButtonsRef} className="flex flex-col gap-6 lg:items-end">
                 <Link
                   to="/collections"
                   className="group bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl w-fit"
@@ -70,7 +170,7 @@ const HomePage: React.FC = () => {
                     <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
                 </Link>
-                
+
               </div>
             </div>
           </div>
