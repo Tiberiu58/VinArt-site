@@ -138,7 +138,7 @@ const HomePage: React.FC = () => {
               opacity: 1,
               x: 0,
               y: 0,
-              duration: 0.4,
+              duration: 0.05,
               ease: 'power2.out'
             }, index * 0.3);
           }
