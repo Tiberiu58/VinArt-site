@@ -16,6 +16,8 @@ const HomePage: React.FC = () => {
   const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const heroSubtitleRef = useRef<HTMLParagraphElement>(null);
   const heroButtonsRef = useRef<HTMLDivElement>(null);
+  const collectionsRef = useRef<HTMLDivElement>(null);
+  const collectionItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Entrance animations on page load
@@ -98,6 +100,50 @@ const HomePage: React.FC = () => {
           }
         }
       });
+
+      // Collections stagger animation
+      if (collectionItemsRef.current.length > 0) {
+        gsap.fromTo(
+          collectionItemsRef.current,
+          {
+            opacity: 0,
+            y: 100,
+            scale: 0.8,
+            rotateY: -15
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateY: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: collectionsRef.current,
+              start: 'top 70%',
+              end: 'bottom 30%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+
+        // Disappear on scroll out
+        gsap.to(collectionItemsRef.current, {
+          opacity: 0,
+          y: -50,
+          scale: 0.9,
+          stagger: 0.1,
+          duration: 0.6,
+          ease: 'power2.in',
+          scrollTrigger: {
+            trigger: collectionsRef.current,
+            start: 'bottom 40%',
+            end: 'bottom 10%',
+            scrub: 1
+          }
+        });
+      }
     });
 
     return () => ctx.revert();
@@ -185,11 +231,13 @@ const HomePage: React.FC = () => {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div ref={collectionsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredCollections.map((collection, index) => (
                 <div
                   key={index}
+                  ref={(el) => (collectionItemsRef.current[index] = el)}
                   className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2"
+                  style={{ perspective: '1000px' }}
                 >
                   <div className="relative overflow-hidden">
                     <img
