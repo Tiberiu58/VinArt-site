@@ -108,13 +108,13 @@ const HomePage: React.FC = () => {
           if (item) {
             if (index === 0) {
               // Left item - comes from left
-              gsap.set(item, { opacity: 0, x: -200, y: 0 });
+              gsap.set(item, { opacity: 20, x: -200, y: 0 });
             } else if (index === 1) {
               // Middle item - comes from bottom
-              gsap.set(item, { opacity: 0, x: 0, y: 150 });
+              gsap.set(item, { opacity: 20, x: 0, y: 150 });
             } else if (index === 2) {
               // Right item - comes from right
-              gsap.set(item, { opacity: 0, x: 200, y: 0 });
+              gsap.set(item, { opacity: 20, x: 20, y: 0 });
             }
           }
         });
@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
           scrollTrigger: {
             trigger: collectionsRef.current,
             start: 'top top',
-            end: '+=100%',
+            end: '+70%',
             pin: true,
             scrub: 1,
             anticipatePin: 1
