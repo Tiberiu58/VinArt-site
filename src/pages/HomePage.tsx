@@ -108,13 +108,13 @@ const HomePage: React.FC = () => {
           if (item) {
             if (index === 0) {
               // Left item - comes from left
-              gsap.set(item, { opacity: 1, x: -200, y: 0 });
+              gsap.set(item, { opacity: 1, x: 0, y: 150 });
             } else if (index === 1) {
               // Middle item - comes from bottom
               gsap.set(item, { opacity: 1, x: 0, y: 150 });
             } else if (index === 2) {
               // Right item - comes from right
-              gsap.set(item, { opacity: 1, x: 200, y: 0 });
+              gsap.set(item, { opacity: 1, x: 0, y: 150 });
             }
           }
         });
