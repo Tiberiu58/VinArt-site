@@ -101,46 +101,39 @@ const HomePage: React.FC = () => {
         }
       });
 
-      // Collections stagger animation
-      if (collectionItemsRef.current.length > 0) {
-        gsap.fromTo(
-          collectionItemsRef.current,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.8,
-            rotateY: -15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotateY: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: collectionsRef.current,
-              start: 'top 70%',
-              end: 'bottom 30%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-
-        // Disappear on scroll out
-        gsap.to(collectionItemsRef.current, {
+      // Collections pinned scroll animation
+      if (collectionItemsRef.current.length > 0 && collectionsRef.current) {
+        // Set initial state - all hidden
+        gsap.set(collectionItemsRef.current, {
           opacity: 0,
-          y: -50,
-          scale: 0.9,
-          stagger: 0.1,
-          duration: 0.6,
-          ease: 'power2.in',
+          y: 50,
+          scale: 0.9
+        });
+
+        // Create pinned scroll timeline
+        const collectionsTl = gsap.timeline({
           scrollTrigger: {
             trigger: collectionsRef.current,
-            start: 'bottom 40%',
-            end: 'bottom 10%',
-            scrub: 1
+            start: 'top top',
+            end: '+=200%',
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1
+          }
+        });
+
+        // Animate each collection item sequentially
+        collectionItemsRef.current.forEach((item, index) => {
+          if (item) {
+            collectionsTl
+              .to(item, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+                ease: 'power2.out'
+              }, index * 0.5)
+              .to({}, { duration: 0.3 }); // Small pause between items
           }
         });
       }
