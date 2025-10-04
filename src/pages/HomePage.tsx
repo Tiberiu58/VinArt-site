@@ -103,37 +103,44 @@ const HomePage: React.FC = () => {
 
       // Collections pinned scroll animation
       if (collectionItemsRef.current.length > 0 && collectionsRef.current) {
-        // Set initial state - all hidden
-        gsap.set(collectionItemsRef.current, {
-          opacity: 0,
-          y: 50,
-          scale: 0.9
+        // Set initial state for each item from different directions
+        collectionItemsRef.current.forEach((item, index) => {
+          if (item) {
+            if (index === 0) {
+              // Left item - comes from left
+              gsap.set(item, { opacity: 0, x: -200, y: 0 });
+            } else if (index === 1) {
+              // Middle item - comes from bottom
+              gsap.set(item, { opacity: 0, x: 0, y: 150 });
+            } else if (index === 2) {
+              // Right item - comes from right
+              gsap.set(item, { opacity: 0, x: 200, y: 0 });
+            }
+          }
         });
 
-        // Create pinned scroll timeline
+        // Create pinned scroll timeline with shorter duration
         const collectionsTl = gsap.timeline({
           scrollTrigger: {
             trigger: collectionsRef.current,
             start: 'top top',
-            end: '+=200%',
+            end: '+=100%',
             pin: true,
             scrub: 1,
             anticipatePin: 1
           }
         });
 
-        // Animate each collection item sequentially
+        // Animate each collection item from their respective directions
         collectionItemsRef.current.forEach((item, index) => {
           if (item) {
-            collectionsTl
-              .to(item, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.5,
-                ease: 'power2.out'
-              }, index * 0.5)
-              .to({}, { duration: 0.3 }); // Small pause between items
+            collectionsTl.to(item, {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              duration: 0.4,
+              ease: 'power2.out'
+            }, index * 0.3);
           }
         });
       }
