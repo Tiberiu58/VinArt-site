@@ -126,6 +126,8 @@ const HomePage: React.FC = () => {
             start: 'top 150%',
             end: 'bottom 105%',
             pin: 'true',
+      
+            anticipatePin: 1
           }
         });
 
