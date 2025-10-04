@@ -123,8 +123,8 @@ const HomePage: React.FC = () => {
         const collectionsTl = gsap.timeline({
           scrollTrigger: {
             trigger: collectionsRef.current,
-            start: 'top top',
-            end: 'bottom 60%',
+            start: 'top 140%',
+            end: 'bottom top',
             pin: 'true',
             scrub: 1,
             anticipatePin: 1
