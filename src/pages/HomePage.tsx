@@ -125,7 +125,6 @@ const HomePage: React.FC = () => {
             trigger: collectionsRef.current,
             start: 'top center',
             end: '+70%',
-            pin: true,
             scrub: 1,
             anticipatePin: 1
           }
