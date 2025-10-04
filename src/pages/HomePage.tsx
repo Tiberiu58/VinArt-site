@@ -70,7 +70,7 @@ const HomePage: React.FC = () => {
       ScrollTrigger.create({
         trigger: heroTitleRef.current,
         start: 'top 80%',
-        end: 'top 20%',
+        end: 'top 200%',
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
@@ -123,8 +123,9 @@ const HomePage: React.FC = () => {
         const collectionsTl = gsap.timeline({
           scrollTrigger: {
             trigger: collectionsRef.current,
-            start: 'bottom center',
-            end: '+70%',
+            start: 'bottom 50%',
+            end: 'bottom top',
+            pin: 'true',
             scrub: 1,
             anticipatePin: 1
           }
