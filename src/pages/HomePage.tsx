@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
           scrollTrigger: {
             trigger: collectionsRef.current,
             start: 'top top',
-            end: 'bottom bottom',
+            end: 'bottom 60%',
             pin: 'true',
             scrub: 1,
             anticipatePin: 1
